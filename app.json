@@ -1,0 +1,41 @@
+{
+  "expo": {
+    "name": "tcgRating",
+    "slug": "tcgRating",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "config": {
+        "googleMobileAdsAppId": "ca-app-pub-9125683895360901~3231607304"
+      },
+      "bundleIdentifier": "Hashimu.TcgRating"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#FFFFFF"
+      },
+      "config": {
+        "googleMobileAdsAppId": "ca-app-pub-9125683895360901~4922348523"
+      },
+      "googleServicesFile": "./google-services.json",
+      "package": "hashimu.tcgrating" ,
+      "permissions": [],
+      "versionCode": 21
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    }
+  }
+}

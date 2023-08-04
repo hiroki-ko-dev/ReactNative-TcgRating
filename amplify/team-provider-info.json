@@ -1,0 +1,23 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-tcgrating-dev-85556-authRole",
+      "UnauthRoleArn": "arn:aws:iam::472721650686:role/amplify-tcgrating-dev-85556-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::472721650686:role/amplify-tcgrating-dev-85556-authRole",
+      "Region": "ap-northeast-1",
+      "DeploymentBucketName": "amplify-tcgrating-dev-85556-deployment",
+      "UnauthRoleName": "amplify-tcgrating-dev-85556-unauthRole",
+      "StackName": "amplify-tcgrating-dev-85556",
+      "StackId": "arn:aws:cloudformation:ap-northeast-1:472721650686:stack/amplify-tcgrating-dev-85556/4a494ce0-3259-11ee-8e92-063a6e7d620f",
+      "AmplifyAppId": "dz64xgw5t8lpq"
+    },
+    "categories": {
+      "auth": {
+        "tcgrating165e379d": {}
+      },
+      "api": {
+        "tcgrating": {}
+      }
+    }
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "622533392435",
+    "project_id": "tcgrating",
+    "storage_bucket": "tcgrating.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:622533392435:android:c2de776bdd1538226f0b46",
+        "android_client_info": {
+          "package_name": "hashimu.tcgrating"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "622533392435-5agfgpmo85o2tererauod4ep1cirgcta.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAtkvg4kkTNhe2YdpYiEZWLUNs_AB56-3c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "622533392435-5agfgpmo85o2tererauod4ep1cirgcta.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "622533392435-hnsup5uvtncb7n2acu40aktes4jj2fhi.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "Hashimu.TcgRating"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
