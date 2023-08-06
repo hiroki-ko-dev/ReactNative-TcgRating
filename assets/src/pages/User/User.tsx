@@ -4,7 +4,6 @@ import { Card, Title, Paragraph, Switch } from 'react-native-paper';
 import userStyles from './User.style';
 import { APP_URL } from '../../config';
 import { AuthContext } from '../../contexts/auth/AuthContext';
-import { LoginUser } from '../../contexts/auth/type';
 
 const User: React.FC = () => {
   const authContext = useContext(AuthContext);
@@ -12,7 +11,6 @@ const User: React.FC = () => {
   if (!loginUser) {
     return <></>
   }
-  const [user, setUser] = useState<LoginUser>(loginUser);
   const [isSwitchOnA, setIsSwitchOnA] = useState(false);
   const [isSwitchOnB, setIsSwitchOnB] = useState(false);
   const [isSwitchOnC, setIsSwitchOnC] = useState(false);
@@ -32,7 +30,7 @@ const User: React.FC = () => {
         <View style={userStyles.container}>
             <Card style={userStyles.card}>
                 <View style={userStyles.cardContent}>
-                    <Text>{user.name}</Text>
+                    <Text>{loginUser.user.name}</Text>
                 </View>
             </Card>
             <Card style={userStyles.card}>
@@ -40,14 +38,14 @@ const User: React.FC = () => {
                   <ImageBackground source={require('../../../images/icon/default-account.png')} resizeMode="cover" style={userStyles.twitterIcon}>
                     <Image
                       style={userStyles.twitterIcon}
-                      source={{uri: user.profileImagePath}}
+                      source={{uri: loginUser.user.profileImagePath}}
                     />
                   </ImageBackground>
                 </View>
             </Card>
             <Card style={userStyles.card}>
                 <View style={userStyles.cardContent}>
-                    <Text>レート：　{user.rate}</Text>
+                    <Text>レート：　{loginUser.user.rate}</Text>
                 </View>
             </Card>
             {/* <Card style={userStyles.card}>

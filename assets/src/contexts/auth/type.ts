@@ -4,11 +4,13 @@ export type AuthContextType = {
 };
 
 export type LoginUser = {
-  id: number;
-  name: string;
-  body: string;
-  profileImagePath: string;
-  birthday: Date;
-  gender: string;
-  rate: number;
+  user: {
+    id: number;
+    name: string;
+    body: string;
+    profileImagePath: string;
+    birthday: Date;
+    gender: string;
+    rate: number;
+  }
 };

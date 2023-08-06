@@ -1,10 +1,12 @@
+import React from 'react';
 import IconFontAwesome from 'react-native-vector-icons/FontAwesome';
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Post from '../Post/Post';
 // import DuelSearchApp from './assets/components/Duel/DuelSearchApp';
 // import DuelHomeApp from './assets/components/Duel/DuelHomeApp';
-import Duel from '../Duel/Duel';
+// import Duel from '../Duel/Duel';
+import Chat from '../Chat/Chat';
 import Rank from '../Rank/Rank';
 import Video from '../Video/Video';
 import User from '../User/User';
@@ -12,17 +14,24 @@ import styles from './Navigation.style';
 
 const Tab = createBottomTabNavigator();
 
-export default function Navigation() {
+const Navigation: React.FC = () => {
   return (
     <NavigationContainer>
         <Tab.Navigator  screenOptions={{ headerShown: false }}>
             <Tab.Screen
               name="対戦を探す"
-              children={ Duel }
+              children={ Chat }
               options={{
                   tabBarIcon: () => (<IconFontAwesome name={"search"}  />)
               }}
             />
+            {/* <Tab.Screen
+              name="対戦を探す"
+              children={ Duel }
+              options={{
+                  tabBarIcon: () => (<IconFontAwesome name={"search"}  />)
+              }}
+            /> */}
             {/* <Tab.Screen
                 name="対戦を探す"
                 children={()=><DuelSearchApp />}
@@ -65,3 +74,5 @@ export default function Navigation() {
     </NavigationContainer>
   );
 }
+
+export default Navigation;

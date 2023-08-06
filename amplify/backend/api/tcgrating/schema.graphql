@@ -5,6 +5,7 @@ input AMPLIFY { globalAuthRule: AuthRule = { allow: public } } # FOR TESTING ONL
 type Message @model {
   id: ID!
   userId: ID!
+  name: String!
   text: String!
-  createdAt: String!
+  imagePath: String! 
 }

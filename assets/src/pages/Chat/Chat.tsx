@@ -1,20 +1,20 @@
 import React, { useState, useEffect, useContext, useRef } from 'react';
-import { ActivityIndicator } from 'react-native';
+import { API, graphqlOperation } from 'aws-amplify';
 import { GiftedChat, Bubble, IMessage, InputToolbar } from 'react-native-gifted-chat';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import * as Animatable from 'react-native-animatable';
-import postCommentStyles from './PostComment.style';
-import { AuthContext } from '../../../contexts/auth/AuthContext';
-import { APP_URL } from "../../../config";
-import { PostCommentType } from '../type';
+import { listMessages } from '../../../../src/graphql/queries';
+import { createMessage } from '../../../../src/graphql/mutations';
+import { AuthContext } from '../../contexts/auth/AuthContext';
 
-type PostCommentProps = {
-  postId: number;
-  setIsLoadingStatus: (status: boolean) => void;
-  setExpanded: (status: boolean) => void;
+type Item = {
+  id: string;
+  name: string;
+  text: string;
+  createdAt: number | Date;
+  imagePath: string;
+  userId: string;
 };
 
-const PostComment: React.FC<PostCommentProps> = ({ postId, setIsLoadingStatus, setExpanded }) => {
+const Chat: React.FC = () => {
   const authContext = useContext(AuthContext);
   const { loginUser } = authContext;
   if (!loginUser) {
@@ -77,4 +77,4 @@ const PostComment: React.FC<PostCommentProps> = ({ postId, setIsLoadingStatus, s
   );
 };
 
-export default PostComment;
+export default Chat;

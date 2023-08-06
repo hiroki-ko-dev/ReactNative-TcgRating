@@ -23,7 +23,6 @@ const Show = () => {
   if (!userContext) {
       throw new Error('UserContext is not provided');
   }
-  const { loginUser: LoginUser, setLoginUser } = userContext;
 
   if (!route.params) {
     // Display error message
@@ -32,7 +31,6 @@ const Show = () => {
   }
   const [post, setPost] = useState<Post>(route.params.post);
   const [isLoding, setIsLoding] = useState(true);
-  const [messages, setMessages] = useState();
   const setLoadingStatus = (status: any) => {
     setIsLoding(status)
   }
