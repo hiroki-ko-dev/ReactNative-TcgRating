@@ -30,7 +30,7 @@ const RankComponent = (rank: RankUser, i: number) => {
   );
 }
 
-const Rank: React.FC  = () => {
+const Rank = () => {
     const [ranks, setRanks] = useState([])
     const [refreshing, setRefreshing] = React.useState(false);
     const onRefreshRank = React.useCallback(() => {

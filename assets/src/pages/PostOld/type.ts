@@ -1,4 +1,4 @@
-export type PostType = {
+export type Post = {
   id: number;
   name: string;
   userId: number;
@@ -28,9 +28,3 @@ export type PostCommentType = {
     profileImagePath: string;
   }
 };
-
-export type AttrPostType = {
-  userId: number;
-  title: string;
-  imageUrl: string;
-}

@@ -5,7 +5,7 @@ import userStyles from './User.style';
 import { APP_URL } from '../../config';
 import { AuthContext } from '../../contexts/auth/AuthContext';
 
-const User: React.FC = () => {
+const User = () => {
   const authContext = useContext(AuthContext);
   const { loginUser } = authContext;
   if (!loginUser) {

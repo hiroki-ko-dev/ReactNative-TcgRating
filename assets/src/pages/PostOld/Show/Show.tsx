@@ -9,11 +9,15 @@ import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 import { AuthContext } from '../../../contexts/auth/AuthContext';
 import { Post } from '../type';
 import styles from "./Show.style";
-import { RootStackParamList } from '../../Navigation/type';
+
+type RootStackParamList = {
+  PostScreen: { post: Post };  // この行を適宜変更します。'PostScreen'はあなたのスクリーン名になります。
+  // 他のスクリーンも必要に応じてここに追加できます。
+};
 
 const Show = () => {
   const navigation = useNavigation();
-  const route = useRoute<RouteProp<RootStackParamList, 'Show'>>();
+  const route = useRoute<RouteProp<RootStackParamList, 'PostScreen'>>();
 
   const userContext = useContext(AuthContext);
   if (!userContext) {
@@ -23,7 +27,7 @@ const Show = () => {
   if (!route.params) {
     // Display error message
     console.error('route.params is undefined');
-    return null; 
+    return;
   }
   const [post, setPost] = useState<Post>(route.params.post);
   const [isLoding, setIsLoding] = useState(true);

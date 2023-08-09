@@ -16,9 +16,21 @@ type PostCommentProps = {
 
 const PostComment: React.FC<PostCommentProps> = ({ postId, setIsLoadingStatus, setExpanded }) => {
   const [comments, setComments] = useState<PostCommentType[]>([]);
-  const [messages, setMessages] = useState<IMessage[]>([]);
+  const [messages, setMessages] = useState<IMessage[]>(
+    [{
+      _id: Math.round(Math.random() * 100000000),
+      text: 'aa',
+      createdAt: new Date('2023-1-1'),
+      user: { 
+        _id: 1,
+        name: 'aa',
+        avatar: 'aa',
+      },
+    }]
+  );
   const [replyMessage, setReplyMessage] = useState<IMessage | null>(null);
   const [messageAnimation, setMessageAnimation] = useState(true);
+  const giftedChatRef = useRef<any>(null);
 
   const userContext = useContext(AuthContext);
   const { loginUser } = userContext;

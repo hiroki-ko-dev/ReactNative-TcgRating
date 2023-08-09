@@ -5,7 +5,7 @@ import { APP_URL } from "../../config";
 import { getDateFormat } from '../../utils/date';
 import videoStyles from './Video.style';
 
-const Video: React.FC = () => {
+const Video = () => {
 
     const [videos, setVideos] = useState([])
     const [message, setMessage] = useState<string>();

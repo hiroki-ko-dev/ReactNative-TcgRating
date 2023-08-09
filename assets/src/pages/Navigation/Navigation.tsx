@@ -20,7 +20,7 @@ const Navigation: React.FC = () => {
         <Tab.Navigator  screenOptions={{ headerShown: false }}>
             <Tab.Screen
               name="対戦を探す"
-              children={ Chat }
+              component={ Chat }
               options={{
                   tabBarIcon: () => (<IconFontAwesome name={"search"}  />)
               }}
@@ -49,16 +49,16 @@ const Navigation: React.FC = () => {
            
             <Tab.Screen
                 name="掲示板"
-                children={()=><Post />}
+                component={ Post }
                 options={{
                     tabBarIcon: ({size, color}) => (<IconFontAwesome name={"twitch"} color={color} size={size} />)
                 }}
             />
-            <Tab.Screen name="ランキング" component={ Rank }
+            {/* <Tab.Screen name="ランキング" component={ Rank }
                 options={{
                     tabBarIcon: ({size, color}) => (<IconFontAwesome name={"trophy"} color={color} size={size} />)
                 }}
-            />
+            /> */}
             <Tab.Screen name="お知らせ" component={ Video }
                 options={{
                     tabBarIcon: () => (<IconFontAwesome name={"youtube-play"} />)
