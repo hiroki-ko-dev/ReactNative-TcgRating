@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Text, View, ScrollView, RefreshControl, Linking, Pressable, Modal } from 'react-native';
-import { NavigationProp, RouteProp } from '@react-navigation/core';
+import { Text, View, ScrollView, RefreshControl } from 'react-native';
+import { NavigationProp } from '@react-navigation/core';
 import { FAB, Provider, Snackbar  } from 'react-native-paper';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import { AuthContext } from '../../../contexts/auth/AuthContext';
 import { PostType } from '../type';
 import postStyles from '../Post.style';
@@ -14,18 +14,13 @@ import CreateModal from './CreateModal';
 const Index = () => {
 
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
-  const route = useRoute<RouteProp<RootStackParamList, '一覧'>>();
   const userContext = useContext(AuthContext);
   const { loginUser } = userContext;
   if (!loginUser) {
       throw new Error('UserContext is not provided');
   }
   const [posts, setPosts] = useState<PostType[]>([]);
-  const [title, setTitle] = useState<string>('');
-  const [imageUrl, setImageUrl] = useState<string>('');
-  const [body, setBody] = useState<string>('');
   const [modalVisible, setModalVisible] = useState<boolean>(false);
-  const [inputHeight, setInputHeight] = useState<number>(0);
 
   // SnacBar関連
   const [message, setMessage] = useState<string>('');
@@ -60,7 +55,13 @@ const Index = () => {
             modalVisible={modalVisible} // こちらを追加
             setModalVisible={setModalVisible} // こちらも追加
           />
-          {(!posts) && <View style={postStyles.cardContent}><Text style={postStyles.cardContent}>現在スレッドがありません</Text></View>}
+          {(!posts) &&
+          <View style={postStyles.cardContent}>
+            <Text style={postStyles.cardContent}>
+              現在スレッドがありません
+            </Text>
+          </View>
+          }
 
           {posts?.map((post: PostType, i) =>
             <Result

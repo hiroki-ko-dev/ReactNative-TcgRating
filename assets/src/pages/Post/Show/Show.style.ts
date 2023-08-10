@@ -1,54 +1,45 @@
 import { StyleSheet } from 'react-native';
 
-const styles = StyleSheet.create({
+export default StyleSheet.create({
   container: {
-    margin: 5,
+    flex: 1,
+    padding: 10,
+    backgroundColor: '#F5F5F5', // 背景色を明るいグレーに設定
   },
-  postHeader:{
-    justifyContent: 'space-between',
-    backgroundColor: '#F0F0F0',
-    marginBottom: 5,
-  },
-  twitterIcon:{
-    width: 50,
-    height: 50,
+  card: {
+    borderRadius: 8,  // カードの角を丸くする
+    shadowColor: '#000', // 影の色を黒に設定
+    shadowOffset: { width: 0, height: 1 }, // 影のオフセットを設定
+    shadowOpacity: 0.2, // 影の不透明度を設定
+    shadowRadius: 2,  // 影の半径を設定
+    elevation: 3,  // Android用の影のelevationを設定
+    padding: 10,
   },
   postUser: {
     flexDirection: 'row',
-    flexGrow: 1,
-  },
-  postIcon:{
-    flex:1,
-    alignItems: 'flex-end',
-  },
-  postUserText:{
-    textAlign: 'right',
-  },
-  cardTitle:{
-    height: 100,
-    fontWeight: 'bold',
-    marginLeft: 5,
-    fontSize: 14,
-  },
-  card: {
-    alignSelf: 'stretch',
-    marginBottom: 13,
-    padding: 5,
-    paddingLeft: 10,
-    paddingBottom: 15,
+    alignItems: 'center',
+    padding: 10,
   },
   cardDate: {
-    textAlign: 'right',
+    flex: 2,
     fontSize: 12,
+    color: 'gray',
   },
-  comments: {
-    height: 100,
+  postIcon: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,  // アイコンを円形にする
+    overflow: 'hidden',  // アイコンの外側を隠す
+    marginLeft: 10,
+  },
+  twitterIcon: {
+    width: '100%',
+    height: '100%',
   },
   loadingAnimation: {
-    position:'absolute',
-    top:300,
-    left: '45%',
-  },
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: [{ translateX: -25 }, { translateY: -25 }],  // ActivityIndicatorの位置を中央に設定
+  }
 });
-
-export default styles;
