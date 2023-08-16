@@ -3,7 +3,8 @@ import { Text, View, Modal, Pressable } from 'react-native';
 import { TextInput } from 'react-native-paper';
 import { APP_URL } from "../../../config";
 import { LoginUser } from '../../../contexts/auth/type';
-import postStyles from '../Post.style';
+import postStyles from './Index.style';
+import { fetchStore } from '@/services/fetchStore';  
 
 interface CreateModalProps {
   loginUser: LoginUser;
@@ -19,30 +20,28 @@ const CreateModal: React.FC<CreateModalProps> = ({ loginUser, setMessage, setSna
   const [body, setBody] = useState<string>('');
   const [inputHeight, setInputHeight] = useState<number>(0);
 
-  function makePost(loginUser: LoginUser) {
-    fetch(APP_URL + '/api/post', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        user_id: loginUser.user.id,
-        title: title,
-        image_url: imageUrl,
-        body: body,
-      })
-    })
-      .then(res => res.json())
-      .then(response => {
-        setMessage('新規のスレッドを作成しました');
-      })
-      .catch((error) => {
-        setMessage('エラー：操作に失敗しました');
-        setSnackVisible(true)
-      });
-
+  async function makePost(loginUser: LoginUser) {
+    const path = APP_URL + '/api/post';
+    const requestBody = JSON.stringify({
+      user_id: loginUser.user.id,
+      title: title,
+      image_url: imageUrl,
+      body: body,
+    });
+    
+    const { data, error } = await fetchStore(path, requestBody);
+  
+    if (data) {
+      setMessage('新規のスレッドを作成しました');
+    } else if (error) {
+      setMessage('エラー：操作に失敗しました');
+      setSnackVisible(true);
+    }
+  
     setTitle('');
     setBody('');
     setImageUrl('');
-
+  
     setSnackVisible(true);
     setModalVisible(!modalVisible);
   }

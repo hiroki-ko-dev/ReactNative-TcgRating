@@ -23,7 +23,7 @@ const AppleView: React.FC<{ setAppleView: (value: boolean) => void, login: (e: a
         style={styles.spaceView}
       />
     </>
-  );
+  )
 }
 
 export default AppleView;

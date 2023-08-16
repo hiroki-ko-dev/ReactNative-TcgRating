@@ -7,7 +7,7 @@ import { AuthContext } from '../../contexts/auth/AuthContext';
 
 const User = () => {
   const authContext = useContext(AuthContext);
-  const { loginUser } = authContext;
+  const { loginUser, setLoginUser } = authContext;
   if (!loginUser) {
     return <></>
   }
@@ -22,6 +22,14 @@ const User = () => {
   const logout = () =>{
     fetch( APP_URL + '/api/auth/logout', {method: 'GET'})
       .then(res => res.json())
+      .then(response => {
+        if (response.code === 200)  {
+          console.log(response);
+          setLoginUser(null);
+        } else {
+          console.log('logout error');
+        }
+      })
   }
 
   return (

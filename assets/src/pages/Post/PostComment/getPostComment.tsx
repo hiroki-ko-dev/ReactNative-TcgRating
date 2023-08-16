@@ -3,10 +3,8 @@ import { View, Text, ActivityIndicator, FlatList, TextInput, TouchableOpacity, I
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import postCommentStyles from './PostComment.style';
 import { AuthContext } from '../../../contexts/auth/AuthContext';
-import { APP_URL } from "@/config";
+import { APP_URL } from "../../../config";
 import { PostCommentType } from '../type';
-import { fetchIndex, FetchIndexType } from '@/services/fetchIndex';
-import Paginator from '@/components/Paginator/Paginator';
 
 type PostCommentProps = {
   postId: number;
@@ -17,6 +15,7 @@ type PostCommentProps = {
 const defaultIcon = require('../../../../images/icon/default-account.png');
 
 const PostComment: React.FC<PostCommentProps> = ({ postId, setIsLoadingStatus, setExpanded }) => {
+  const [comments, setComments] = useState<PostCommentType[]>([]);
   const [message, setMessage] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -26,49 +25,27 @@ const PostComment: React.FC<PostCommentProps> = ({ postId, setIsLoadingStatus, s
     throw new Error('UserContext is not provided');
   }
 
-  const path = `${APP_URL}/api/post_comment?post_id=${postId}`;
-  const query = `&post_id=${postId}`;
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const [fetchedData, setFetchedData] = useState<FetchIndexType<PostCommentType[], any>>(
-    { data: undefined, paginate: undefined, error: undefined }
-  );
-  const { data: comments, paginate: paginate, error: error } = fetchedData;
-
   useEffect(() => {
-    async function fetchData() {
-      const result = await fetchIndex<PostCommentType[], Error>(path, query, currentPage);
-      setFetchedData(result);
+    getComments();
+  }, []);
+  
+  const getComments = async () => {
+    try {
+      const res = await fetch(APP_URL + '/api/post_comment?post_id=' + postId);
+      const response = await res.json();
+
+      if (response && response.data.paginate){
+        setComments(response.data.paginate.data);
+      } else {
+        console.log('配列が空');
+      }
+
+    } catch (error) {
+      console.log('エラー:', error);
     }
-    fetchData();
     setIsLoadingStatus(false);
     setLoading(false);
-  }, [currentPage]);
-
-  if (!comments || !paginate) {
-    return <></>;
   }
-
-  // useEffect(() => {
-  //   getComments();
-  // }, []);
-  
-  // const getComments = async () => {
-  //   try {
-  //     const res = await fetch(APP_URL + '/api/post_comment?post_id=' + postId);
-  //     const response = await res.json();
-
-  //     if (response && response.data.paginate){
-  //       setComments(response.data.paginate.data);
-  //     } else {
-  //       console.log('配列が空');
-  //     }
-
-  //   } catch (error) {
-  //     console.log('エラー:', error);
-  //   }
-  //   setIsLoadingStatus(false);
-  //   setLoading(false);
-  // }
 
   const sendComment = async () => {
     try {
@@ -83,7 +60,7 @@ const PostComment: React.FC<PostCommentProps> = ({ postId, setIsLoadingStatus, s
       });
       if(response.ok) {
         setMessage('');
-        // await getComments();
+        await getComments();
       }
     } catch (error) {
       console.log('コメントの送信に失敗:', error);
@@ -92,12 +69,6 @@ const PostComment: React.FC<PostCommentProps> = ({ postId, setIsLoadingStatus, s
 
   return (
     <View style={postCommentStyles.container}>
-      <Paginator
-        path={path}
-        paginate={paginate}
-        onNext={() => setCurrentPage(prev => prev + 1)} 
-        onPrevious={() => setCurrentPage(prev => prev - 1)}
-      />
       <FlatList
         data={comments}
         scrollEnabled={false}  // スクロールを無効にする
@@ -113,12 +84,6 @@ const PostComment: React.FC<PostCommentProps> = ({ postId, setIsLoadingStatus, s
           </View>
         )}
         keyExtractor={(item) => item.id.toString()}
-      />
-      <Paginator
-        path={path}
-        paginate={paginate}
-        onNext={() => setCurrentPage(prev => prev + 1)} 
-        onPrevious={() => setCurrentPage(prev => prev - 1)}
       />
       <View style={postCommentStyles.inputContainer}>
       <TextInput 

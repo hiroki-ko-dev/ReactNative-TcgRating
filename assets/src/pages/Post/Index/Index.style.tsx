@@ -2,8 +2,34 @@ import { StyleSheet } from 'react-native';
 
 const postStyles = StyleSheet.create({
   container: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    flex: 1,
+    padding: 10,
+    backgroundColor: '#f6f6f6',
+  },
+  cardContent: {
+    padding: 15,
+    borderRadius: 8,
+    backgroundColor: '#ffffff',
+    marginBottom: 15,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3,
+    elevation: 5,
+  },
+  snackView: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+  },
+  plusButton: {
+    position: 'absolute',
+    right: 20,
+    bottom: 20,
   },
   inputContainer: {
     alignItems: 'center',
@@ -11,36 +37,30 @@ const postStyles = StyleSheet.create({
   },
   cardHeader: {
       flexDirection: 'row',
-      flexGrow: 1,
       justifyContent: 'space-between',
+      marginBottom: 10,
   },
   cardTitle: {
       flexDirection: 'row',
-      flexGrow: 1,
-      margin: 10,
+      alignItems: 'center',
   },
   cardHeaderText: {
-      fontSize: 8,
+      fontSize: 12,
+      color: '#555',
   },
   cardDate: {
       textAlign: 'right',
   },
   cardTitleText: {
-      fontSize:14,
+      fontSize: 16,
       fontWeight: 'bold',
       marginLeft: 10,
-      paddingHorizontal: 10,
   },
   card: {
       alignSelf: 'stretch',
       backgroundColor: '#fffaf0',
       margin: 5,
-  },
-  cardContent: {
-      textAlign: 'left',
-      justifyContent: 'center',
-      backgroundColor: '#fff',
-      padding: 10,
+      borderRadius: 10,
   },
   centeredView: {
       flex: 1,
@@ -51,7 +71,7 @@ const postStyles = StyleSheet.create({
   modalView: {
       width: 400,
       margin: 5,
-      backgroundColor: "white",
+      backgroundColor: "#ffffff",
       borderRadius: 20,
       padding: 35,
       shadowColor: "#000",
@@ -63,46 +83,31 @@ const postStyles = StyleSheet.create({
       shadowRadius: 4,
       elevation: 5
   },
-  pickerItem: {
-      margin: 20,
-      padding: 35,
-      alignItems: "center",
-      elevation: 5
-  },
   button: {
       borderRadius: 20,
-      padding: 15,
-      margin:30,
+      padding: 10,
+      marginVertical: 10,
       elevation: 2
   },
   buttonOpen: {
       backgroundColor: "#F194FF",
   },
   buttonClose: {
-      backgroundColor: "#696969",
+      backgroundColor: "#7B7B7B",
   },
   buttonConform: {
-      backgroundColor: "#2196F3",
-      marginTop: 50,
-      marginBottom: 3,
+      backgroundColor: "#007BFF",
   },
   textStyle: {
       color: "white",
       fontWeight: "bold",
-      textAlign: "center"
+      textAlign: "center",
+      fontSize: 16,
   },
   modalText: {
-      marginBottom: 15,
-  },
-  snackView: {
-      width: 350,
-      position:'absolute',
-      top:100
-  },
-  plusButton: {
-      position:'absolute',
-      bottom: 20,
-      right: 20,
+      marginBottom: 20,
+      fontSize: 18,
+      fontWeight: '600',
   },
 });
 

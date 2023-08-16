@@ -3,7 +3,7 @@ import { Text, View } from 'react-native';
 import { Card } from 'react-native-paper';
 import { getDateFormat } from '../../../utils/date';
 import IconFontAwesome from 'react-native-vector-icons/FontAwesome';
-import postStyles from '../Post.style';
+import postStyles from './Index.style';
 // import { Admob } from "../../components/Common/Common";
 
 interface ResultProps {

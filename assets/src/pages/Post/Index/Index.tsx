@@ -1,41 +1,54 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useCallback } from 'react';
 import { Text, View, ScrollView, RefreshControl } from 'react-native';
 import { NavigationProp } from '@react-navigation/core';
-import { FAB, Provider, Snackbar  } from 'react-native-paper';
+import { FAB, Provider, Snackbar } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { AuthContext } from '../../../contexts/auth/AuthContext';
-import { PostType } from '../type';
-import postStyles from '../Post.style';
+import { PostType, IndexResponseType } from '../type';
+import postStyles from './Index.style';
 import { RootStackParamList } from '../../Navigation/type';
-import getPosts from './getPosts';
 import Result from './Result';
 import CreateModal from './CreateModal';
+import { APP_URL } from "@/config";
+import { fetchIndex, FetchIndexType } from '@/services/fetchIndex';
+import Paginator from '@/components/Paginator/Paginator';
 
 const Index = () => {
-
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
-  const userContext = useContext(AuthContext);
-  const { loginUser } = userContext;
+  const { loginUser } = useContext(AuthContext);
   if (!loginUser) {
       throw new Error('UserContext is not provided');
   }
-  const [posts, setPosts] = useState<PostType[]>([]);
-  const [modalVisible, setModalVisible] = useState<boolean>(false);
 
-  // SnacBar関連
+  const [modalVisible, setModalVisible] = useState<boolean>(false);
   const [message, setMessage] = useState<string>('');
   const [snackVisible, setSnackVisible] = useState<boolean>(false);
-  const [refreshing, setRefreshing] = React.useState<boolean>(false);
+  const [refreshing, setRefreshing] = useState<boolean>(false);
+
+  const path = `${APP_URL}/api/post`;
+  const query = '';
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [fetchedData, setFetchedData] = useState<FetchIndexType<PostType[], any>>(
+    { data: undefined, paginate: undefined, error: undefined }
+  );
 
   useEffect(() => {
-    getPosts(setPosts, setMessage, setSnackVisible);
-  },[]);
+    async function fetchData() {
+      const result = await fetchIndex<PostType[], Error>(path, query, currentPage);
+      setFetchedData(result);
+    }
+    fetchData();
+  }, [currentPage]);
 
-  const onRefresh = React.useCallback(() => {
-    setRefreshing(true);
-    getPosts(setPosts, setMessage, setSnackVisible);
-    setRefreshing(false);
-  }, []);
+  const { data: posts, paginate: paginate, error: error } = fetchedData;
+
+  if (!posts || !paginate) {
+    return <></>;
+  }
+
+  const onRefresh = () => {
+    setCurrentPage(1);
+  };
 
   return (
     <>
@@ -52,46 +65,49 @@ const Index = () => {
             loginUser={loginUser}
             setMessage={setMessage}
             setSnackVisible={setSnackVisible}
-            modalVisible={modalVisible} // こちらを追加
-            setModalVisible={setModalVisible} // こちらも追加
+            modalVisible={modalVisible}
+            setModalVisible={setModalVisible}
           />
           {(!posts) &&
-          <View style={postStyles.cardContent}>
-            <Text style={postStyles.cardContent}>
-              現在スレッドがありません
-            </Text>
-          </View>
+            <View style={postStyles.cardContent}>
+              <Text style={postStyles.cardContent}>現在スレッドがありません</Text>
+            </View>
           }
-
-          {posts?.map((post: PostType, i) =>
+          {posts.map((post: PostType, i: number) => (
             <Result
               post={post}
               i={i}
               navigation={navigation}
               key={post.id}
             />
-          )}
-          <View style={postStyles.snackView}>
-            <Snackbar 
-              visible={snackVisible}
-              onDismiss={() => setSnackVisible(false)}
-              action={{
-                label: "閉じる",
-                onPress: () => setSnackVisible(false)
-              }}
-            >
-              {message}
-            </Snackbar>
-          </View>
+          ))}
+          <Snackbar
+            visible={snackVisible}
+            onDismiss={() => setSnackVisible(false)}
+            action={{
+              label: "閉じる",
+              onPress: () => setSnackVisible(false)
+            }}
+          >
+            {message}
+          </Snackbar>
+        </View>
+        <View style={{ marginBottom: 100 }}>
+          <Paginator
+            path={path}
+            paginate={paginate}
+            onNext={() => setCurrentPage(prev => prev + 1)} 
+            onPrevious={() => setCurrentPage(prev => prev - 1)}
+          />
         </View>
       </ScrollView>
-      <View style={postStyles.plusButton}>
-        <Provider>
-          <FAB icon="plus"
-            onPress={() => setModalVisible(true)}
-          />
-        </Provider>
-      </View>
+      <Provider>
+        <FAB
+          style={postStyles.plusButton}
+          icon="plus"
+          onPress={() => setModalVisible(true)}
+        />
+      </Provider>
     </>
   );
 }

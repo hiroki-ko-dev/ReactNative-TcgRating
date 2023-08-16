@@ -1,8 +1,6 @@
 import React, { useState, useContext } from 'react';
-import { ScrollView, Platform, View, Text, Image, ImageBackground } from 'react-native';
-import { Card, Title, Paragraph, ActivityIndicator, List } from "react-native-paper";
-import ImageModal from 'react-native-image-modal';
-import PlatformImage from '../../../components/PlatformImage';
+import { ScrollView, View, Text, Image, ImageBackground } from 'react-native';
+import { Card, Paragraph, ActivityIndicator, List } from "react-native-paper";
 import PostComment from '../PostComment/PostComment';
 import { getDateFormat } from '../../../utils/date';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
@@ -26,7 +24,7 @@ const Show = () => {
   }
 
   const [post, setPost] = useState<PostType>(route.params.post);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const setLoadingStatus = (status: any) => {
     setIsLoading(status)
   }
@@ -55,12 +53,12 @@ const Show = () => {
             <Paragraph>{post.body}</Paragraph>
           </List.Section>
         </Card>
+        <PostComment
+          postId={post.id}
+          setIsLoadingStatus={setLoadingStatus}
+          setExpanded={setExpanded}
+        />
       </View>
-      <PostComment
-        postId={post.id}
-        setIsLoadingStatus={setLoadingStatus}
-        setExpanded={setExpanded}
-      />
       <View style={styles.loadingAnimation}>
         <ActivityIndicator animating={isLoading} size='large' color="#FF4500" />
       </View>

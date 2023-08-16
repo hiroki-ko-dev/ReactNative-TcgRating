@@ -269,7 +269,12 @@ const Show = ({navigation, route}) => {
                   </Text>
                 </Button>
               }
-              <Button mode="contained" style={showStyles.button} color="black" onPress={() => {duelRequest('finish')}}>
+              <Button 
+                mode="contained" 
+                style={showStyles.button} 
+                buttonColor="black" 
+                onPress={() => duelRequest('finish')}
+              >
                 <IconFontAwesome name="flag-checkered" style={{paddingRight: 10}} size={30} color="white"/>
                 <Text style={[showStyles.buttonText, {color: 'white'}]}>
                   対戦終了

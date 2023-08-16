@@ -1,3 +1,5 @@
+import { PaginateType } from '../../components/Paginator/Paginator.type';
+
 export type PostType = {
   id: number;
   name: string;
@@ -12,6 +14,12 @@ export type PostType = {
     name: string;
     profileImagePath: string;
   }
+};
+
+export type IndexResponseType = {
+  posts: PostType[];
+  paginate: PaginateType;
+  error: Error;
 };
 
 export type PostCommentType = {
