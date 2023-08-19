@@ -3,26 +3,23 @@ import { Text, View, ScrollView, RefreshControl } from 'react-native';
 import { NavigationProp } from '@react-navigation/core';
 import { FAB, Provider, Snackbar } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
-import { AuthContext } from '../../../contexts/auth/AuthContext';
 import { PostType, IndexResponseType } from '../type';
 import postStyles from './Index.style';
 import { RootStackParamList } from '../../Navigation/type';
 import Result from './Result';
-import CreateModal from './CreateModal';
+import CreateModal from './CreateModal/CreateModal';
 import { APP_URL } from "@/config";
 import { fetchIndex, FetchIndexType } from '@/services/fetchIndex';
 import Paginator from '@/components/Paginator/Paginator';
+import { useLoginUser } from '@/contexts/auth/useLoginUser';
+import { useSnackbar } from '@/contexts/snack/useSnackbar';
 
 const Index = () => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
-  const { loginUser } = useContext(AuthContext);
-  if (!loginUser) {
-      throw new Error('UserContext is not provided');
-  }
+  const loginUser = useLoginUser();
+  const { setSnackMessage } = useSnackbar();
 
   const [modalVisible, setModalVisible] = useState<boolean>(false);
-  const [message, setMessage] = useState<string>('');
-  const [snackVisible, setSnackVisible] = useState<boolean>(false);
   const [refreshing, setRefreshing] = useState<boolean>(false);
 
   const path = `${APP_URL}/api/post`;
@@ -32,13 +29,14 @@ const Index = () => {
     { data: undefined, paginate: undefined, error: undefined }
   );
 
+  const fetchData = useCallback(async () => {
+    const result = await fetchIndex<PostType[], Error>(path, query, currentPage);
+    setFetchedData(result);
+  }, [currentPage, path, query]);
+  
   useEffect(() => {
-    async function fetchData() {
-      const result = await fetchIndex<PostType[], Error>(path, query, currentPage);
-      setFetchedData(result);
-    }
     fetchData();
-  }, [currentPage]);
+  }, [fetchData]);
 
   const { data: posts, paginate: paginate, error: error } = fetchedData;
 
@@ -63,10 +61,10 @@ const Index = () => {
         <View style={postStyles.container}>
           <CreateModal
             loginUser={loginUser}
-            setMessage={setMessage}
-            setSnackVisible={setSnackVisible}
+            setSnackMessage={setSnackMessage}
             modalVisible={modalVisible}
             setModalVisible={setModalVisible}
+            fetchData={fetchData}
           />
           {(!posts) &&
             <View style={postStyles.cardContent}>
@@ -81,16 +79,6 @@ const Index = () => {
               key={post.id}
             />
           ))}
-          <Snackbar
-            visible={snackVisible}
-            onDismiss={() => setSnackVisible(false)}
-            action={{
-              label: "閉じる",
-              onPress: () => setSnackVisible(false)
-            }}
-          >
-            {message}
-          </Snackbar>
         </View>
         <View style={{ marginBottom: 100 }}>
           <Paginator

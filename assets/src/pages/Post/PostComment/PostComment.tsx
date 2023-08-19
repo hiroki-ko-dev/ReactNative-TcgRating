@@ -127,8 +127,8 @@ const PostComment: React.FC<PostCommentProps> = ({ postId, setIsLoadingStatus, s
         placeholder="コメントを入力"
         style={postCommentStyles.input}
         multiline={true}
-        numberOfLines={8} // これは例です。適切な行数を設定してください。
-        returnKeyType="done" // キーボードのリターンキーを押したときの動作を設定します。必要に応じて変更してください。
+        numberOfLines={8}
+        returnKeyType="done"
       />
         <TouchableOpacity
           onPress={sendComment}

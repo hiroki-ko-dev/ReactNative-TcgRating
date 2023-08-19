@@ -118,7 +118,7 @@ const Index = (
 
   function makeDuel(){
     let json = JSON.stringify({
-      user_id: loginUser!.id,
+      user_id: loginUser!.user.id,
       rate_type: rate,
       regulation_type: regulation,
       card_type: proxy,

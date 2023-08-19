@@ -2,29 +2,26 @@ import React, { useState, useEffect, useRef, useContext } from 'react';
 import { Platform, Text, View, Image, TouchableOpacity } from 'react-native';
 import { APP_URL, GAME_ID } from '../../config';
 import styles from './Login.style';
-import { AuthContext } from '../../contexts/auth/AuthContext';
+import { useAuth } from '../../contexts/auth/useAuth';
+import { useSnackbar } from '@/contexts/snack/useSnackbar';
 import DiscordView from './DiscordView';
 import AppleView from './AppleView';
 import Title from './Title';
 
 const Login = () => {
 
-  const userContext = useContext(AuthContext);
   const [discordView, setDiscordView] = useState(false);
   const [appleView, setAppleView] = useState(false);
   const [expoPushToken, setExpoPushToken] = useState(null);
 
-  if (!userContext) {
-    throw new Error('UserContext is not provided');
-  }
-  const { setLoginUser } = userContext;
+  const { loginUser, setLoginUser } = useAuth();
+  const { setSnackMessage } = useSnackbar();
 
   //Web側からのpostMessageに対応
   const login = async (e: any) => {
     let loginUserId: number;
     console.log(Platform.OS);
     if (Platform.OS === 'web') {
-      console.log('web');
       loginUserId = 14;
     } else {
       loginUserId = 1;
@@ -33,6 +30,7 @@ const Login = () => {
     // ログインキャンセルした場合
     if (loginUserId === 0) {
       setLoginUser(null);
+      setSnackMessage('ログインエラーが発生しました');
       return <></>;
     }
 
@@ -57,7 +55,7 @@ const Login = () => {
       const data = await response.json();
       setLoginUser(data.data);
     } catch (error) {
-      console.error('Error during JSON parsing:', error);
+      setSnackMessage('ログインエラーが発生しました')
     }
   };
   if (Platform.OS === 'web') {
@@ -68,7 +66,7 @@ const Login = () => {
       return <DiscordView setDiscordView={setDiscordView} login={login} />;
     } else if (appleView){
       return <AppleView setAppleView={setAppleView} login={login} />;
-    } else if (!userContext.loginUser) {
+    } else if (!loginUser) {
       return <Title setDiscordView={setDiscordView} setAppleView={setAppleView} />;
     } else {
       return (<></>);

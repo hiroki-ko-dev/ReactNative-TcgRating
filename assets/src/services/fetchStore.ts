@@ -5,7 +5,7 @@ export type FetchStoreType<DataType, ErrorType> = {
 
 export async function fetchStore<DataType, ErrorType>(
   path: string,
-  query: string,
+  requestBody: string,
 ): Promise<FetchStoreType<DataType, ErrorType>> {
   let data: DataType | undefined;
   let errorHolder: ErrorType | undefined;
@@ -14,13 +14,13 @@ export async function fetchStore<DataType, ErrorType>(
     const response = await fetch(`${path}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: query
+      body: requestBody,
     });
     if (!response.ok) {
       throw new Error('Server response was not ok');
     }
     const responseJson = await response.json();
-    data = responseJson.data.paginate.data;
+    data = responseJson.data;
   } catch (error: any) {
     errorHolder = error;
   }
