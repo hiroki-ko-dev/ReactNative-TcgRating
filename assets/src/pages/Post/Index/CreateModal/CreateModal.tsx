@@ -87,8 +87,7 @@ const CreateModal: React.FC<CreateModalProps> = ({
                 multiline={true}
                 blurOnSubmit={false}
                 onChangeText={text => setBody(text)}
-                numberOfLines={15}
-                returnKeyType="done"
+                style={{ height: 300 }}
               />
             </View>
             <View style={[createModalStyles.buttonView]}>

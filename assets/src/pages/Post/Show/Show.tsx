@@ -25,11 +25,6 @@ const Show = () => {
 
   const [post, setPost] = useState<PostType>(route.params.post);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const setLoadingStatus = (status: any) => {
-    setIsLoading(status)
-  }
-  const [expanded, setExpanded] = useState(true);
-  const handlePress = () => setExpanded(!expanded);
 
   const userIconSource = post.user.profileImagePath ? { uri: post.user.profileImagePath } : require('../../../../images/icon/default-account.png');
 
@@ -55,8 +50,7 @@ const Show = () => {
         </Card>
         <PostComment
           postId={post.id}
-          setIsLoadingStatus={setLoadingStatus}
-          setExpanded={setExpanded}
+          setIsLoading={setIsLoading}
         />
       </View>
       <View style={styles.loadingAnimation}>

@@ -62,6 +62,9 @@ const createModalStyles = StyleSheet.create({
     marginBottom: 10,  // ここを追加
     width: '100%',
   },
+  inputTextArea: {
+    height: '200',
+  },
 });
 
 export default createModalStyles;
