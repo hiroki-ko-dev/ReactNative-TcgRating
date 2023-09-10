@@ -18,7 +18,10 @@ export default StyleSheet.create({
   postUser: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: 10,
+    paddingTop: 10,
+  },
+  postUserName: {
+    paddingLeft: 10,
   },
   cardDate: {
     flex: 2,
@@ -30,7 +33,6 @@ export default StyleSheet.create({
     height: 40,
     borderRadius: 20,  // アイコンを円形にする
     overflow: 'hidden',  // アイコンの外側を隠す
-    marginLeft: 10,
   },
   twitterIcon: {
     width: '100%',
@@ -41,5 +43,10 @@ export default StyleSheet.create({
     top: '50%',
     left: '50%',
     transform: [{ translateX: -25 }, { translateY: -25 }],  // ActivityIndicatorの位置を中央に設定
-  }
+  },
+  plusButton: {
+    position: 'absolute',
+    right: 20,
+    bottom: 20,
+  },
 });

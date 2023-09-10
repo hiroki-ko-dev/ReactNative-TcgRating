@@ -8,4 +8,5 @@ type Message @model {
   name: String!
   text: String!
   imagePath: String! 
+  replyToId: ID
 }

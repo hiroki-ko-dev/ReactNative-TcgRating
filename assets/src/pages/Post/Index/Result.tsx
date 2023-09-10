@@ -8,11 +8,10 @@ import postStyles from './Index.style';
 
 interface ResultProps {
   post: any;
-  i: number;
   navigation: any;
 }
 
-const Result = ({ post, i, navigation }: ResultProps) => {
+const Result = ({ post, navigation }: ResultProps) => {
   return (
     <Card style={postStyles.card} key={post.id}
       onPress={() => {
@@ -22,7 +21,7 @@ const Result = ({ post, i, navigation }: ResultProps) => {
       <View style={postStyles.cardContent}>
         {/* {i%3 == 0 && <Admob />} */}
         <View style={postStyles.cardHeader}>
-          <Text style={postStyles.cardHeaderText}>{'　NO.' + (i+1)}</Text>
+          <Text style={postStyles.cardHeaderText}>{'NO.' + (post.id)}</Text>
           <Text style={[postStyles.cardDate,postStyles.cardHeaderText]}>作成日：{getDateFormat(post.createdAt)}</Text>
         </View>
         <View style={postStyles.cardTitle}>

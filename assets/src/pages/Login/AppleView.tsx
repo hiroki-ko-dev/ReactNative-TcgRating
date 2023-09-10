@@ -11,7 +11,7 @@ const AppleView: React.FC<{ setAppleView: (value: boolean) => void, login: (e: a
         <View style={{height:70, backgroundColor:'black'}}></View>
         <View>
           <Text style={{marginLeft: 30, height:30,color:'white', fontSize:16}}
-              onPress={() => setAppleView(false)}
+            onPress={() => setAppleView(false)}
           >
             完了
           </Text>

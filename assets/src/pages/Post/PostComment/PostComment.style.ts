@@ -6,6 +6,7 @@ const postCommentStyles = StyleSheet.create({
     justifyContent: 'space-between', 
     padding: 10,
     backgroundColor: '#f5f5f5',
+    marginBottom: 50,
   },
   commentContainer: {
     padding: 10,
@@ -13,12 +14,36 @@ const postCommentStyles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 5,
   },
-  userName: {
+  noAndDateContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  commentNo: {
+    fontSize: 14,
     fontWeight: 'bold',
+    marginRight: 5,
   },
   dateText: {
     fontSize: 10,
     color: 'gray',
+    marginRight: 10,
+  },
+  userContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  userName: {
+    fontWeight: 'bold',
+    marginLeft: 5,
+  },
+  userIcon: {
+    width: 30,
+    height: 30,
+    borderRadius: 25,
+    marginRight: 10,
+  },
+  bodyText: {
+      marginTop: 10,
   },
   inputContainer: {
     flexDirection: 'row',
@@ -34,12 +59,6 @@ const postCommentStyles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 5,
   },
-  userIcon: {
-    width: 50,       // お好みに合わせてサイズを調整してください
-    height: 50,      // お好みに合わせてサイズを調整してください
-    borderRadius: 25, // 丸いアイコンにする場合は、widthとheightの半分の値を指定してください
-    marginRight: 10,  // アイコンとテキストの間のスペース
-  },
   sendButton: {
     backgroundColor: '#007AFF', // 例として青色を使用
     padding: 8,
@@ -47,6 +66,11 @@ const postCommentStyles = StyleSheet.create({
     alignItems: 'center',  // これをcenterに変更
     justifyContent: 'flex-end',  // 中央から下寄せに変更
     marginLeft: 10, // テキストエリアとの間隔を開ける
+  },
+  plusButton: {
+    position: 'absolute',
+    right: 20,
+    bottom: 20,
   },
 });
 

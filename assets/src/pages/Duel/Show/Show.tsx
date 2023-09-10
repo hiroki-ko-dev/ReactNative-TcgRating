@@ -214,7 +214,10 @@ const Show = ({navigation, route}) => {
               />
             </ImageBackground>                    
           :
-            <ImageBackground  resizeMode="cover" style={showStyles.twitterIcon} /> 
+            <ImageBackground
+              resizeMode="cover"
+              style={showStyles.twitterIcon}
+            /> 
           } 
         </View>
         {result && (
@@ -272,7 +275,6 @@ const Show = ({navigation, route}) => {
               <Button 
                 mode="contained" 
                 style={showStyles.button} 
-                buttonColor="black" 
                 onPress={() => duelRequest('finish')}
               >
                 <IconFontAwesome name="flag-checkered" style={{paddingRight: 10}} size={30} color="white"/>
@@ -289,29 +291,28 @@ const Show = ({navigation, route}) => {
     }
       
     return(
-        <View>
-            {statusButton}
-            {/* <Admob /> */}
-            <Card style={showStyles.card}>
-                {duelUser1 &&
-                    <Button mode="contained" style={showStyles.discordJoin} color="#7289da" onPress={() => {Linking.openURL(DISCORD_URL)}}>
-                        <IconFontisto name="discord" style={{marginsRight: 10}} size={30} color="white" />
-                        <Text style={[showStyles.buttonText, {color: 'white'}]}>対戦Discordに移動</Text>
-                    </Button>
+      <View>
+        {statusButton}
+        {/* <Admob /> */}
+        <Card style={showStyles.card}>
+          {duelUser1 &&
+            <Button mode="contained" style={showStyles.discordJoin} color="#7289da" onPress={() => {Linking.openURL(DISCORD_URL)}}>
+                <IconFontisto name="discord" style={{marginsRight: 10}} size={30} color="white" />
+                <Text style={[showStyles.buttonText, {color: 'white'}]}>対戦Discordに移動</Text>
+            </Button>
 
+            // <TouchableOpacity style={showStyles.cardContent} onPress={() => {
+            //     Linking.openURL(DISCORD_URL)
+            // }}>
+                /* <Image
+                    style={showStyles.discordJoin}
+                    source={require('../../assets/images/discord/join.png')}
+                /> */
 
-                    // <TouchableOpacity style={showStyles.cardContent} onPress={() => {
-                    //     Linking.openURL(DISCORD_URL)
-                    // }}>
-                        /* <Image
-                            style={showStyles.discordJoin}
-                            source={require('../../assets/images/discord/join.png')}
-                        /> */
-
-                    // </TouchableOpacity>
-                }              
-            </Card>
-        </View>
+            // </TouchableOpacity>
+          }              
+        </Card>
+      </View>
     );
   }
 

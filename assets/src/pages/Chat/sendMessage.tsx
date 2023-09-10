@@ -2,29 +2,26 @@ import { API, graphqlOperation } from 'aws-amplify';
 import { createMessage } from '../../../../src/graphql/mutations';
 import { GiftedChat, IMessage } from 'react-native-gifted-chat';
 import { LoginUser } from '../../contexts/auth/type';
-import { utcConvertToJST } from '../../utils/date';
 
 type SetMessages = (messages: ((previousMessages: IMessage[]) => IMessage[]) | IMessage[]) => void;
-type SetMessageAnimation = React.Dispatch<React.SetStateAction<boolean>>;
 
 const sendMessage = async (
   newMessage: IMessage[] = [],
   loginUser: LoginUser,
   setMessages: SetMessages,
-  setMessageAnimation: SetMessageAnimation
 ) => {
   const messageDetails = {
     userId: loginUser.user.id,
     text: newMessage[0].text,
     name: loginUser.user.name,
     imagePath: 'https://pbs.twimg.com/profile_images/1682779789340585984/1qM80E63_400x400.jpg',
+    replyToId: 1,
   };
 
   // newMessage[0].createdAt = utcConvertToJST(new Date(newMessage[0].createdAt))
 
   // UIを直接アップデート
   setMessages(previousMessages => GiftedChat.append(previousMessages, newMessage));
-  setMessageAnimation(prev => !prev); // トグルする
 
   const result = API.graphql(graphqlOperation(createMessage, { input: messageDetails }));
 

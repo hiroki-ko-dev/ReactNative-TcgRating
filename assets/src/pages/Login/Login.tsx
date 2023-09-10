@@ -20,7 +20,6 @@ const Login = () => {
   //Web側からのpostMessageに対応
   const login = async (e: any) => {
     let loginUserId: number;
-    console.log(Platform.OS);
     if (Platform.OS === 'web') {
       loginUserId = 14;
     } else {
@@ -58,20 +57,20 @@ const Login = () => {
       setSnackMessage('ログインエラーが発生しました')
     }
   };
-  if (Platform.OS === 'web') {
+  // if (Platform.OS === 'web') {
     login(14);
-  }
-  else {
-    if (discordView) {
-      return <DiscordView setDiscordView={setDiscordView} login={login} />;
-    } else if (appleView){
-      return <AppleView setAppleView={setAppleView} login={login} />;
-    } else if (!loginUser) {
-      return <Title setDiscordView={setDiscordView} setAppleView={setAppleView} />;
-    } else {
-      return (<></>);
-    }
-  }
+  // }
+  // else {
+  //   if (discordView) {
+  //     return <DiscordView setDiscordView={setDiscordView} login={login} />;
+  //   } else if (appleView){
+  //     return <AppleView setAppleView={setAppleView} login={login} />;
+  //   } else if (!loginUser) {
+  //     return <Title setDiscordView={setDiscordView} setAppleView={setAppleView} />;
+  //   } else {
+  //     return (<></>);
+  //   }
+  // }
 }
 
 export default Login;

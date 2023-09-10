@@ -1,6 +1,6 @@
-import React, {useState, useEffect, useContext } from 'react';
-import { StyleSheet, Text, View, ScrollView, Image, ImageBackground, Button } from 'react-native';
-import { Card, Title, Paragraph, Switch } from 'react-native-paper';
+import React, {useState, useContext } from 'react';
+import { Text, View, ScrollView, Image, ImageBackground, Button } from 'react-native';
+import { Card, Title } from 'react-native-paper';
 import userStyles from './User.style';
 import { APP_URL } from '../../config';
 import { AuthContext } from '../../contexts/auth/AuthContext';
@@ -51,11 +51,11 @@ const User = () => {
                   </ImageBackground>
                 </View>
             </Card>
-            <Card style={userStyles.card}>
+            {/* <Card style={userStyles.card}>
                 <View style={userStyles.cardContent}>
                     <Text>レート：　{loginUser.user.rate}</Text>
                 </View>
-            </Card>
+            </Card> */}
             {/* <Card style={userStyles.card}>
                 <View style={userStyles.cardContent}>
                     <Text>PUSH通知設定A　</Text>

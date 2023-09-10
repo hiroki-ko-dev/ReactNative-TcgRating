@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-const createModalStyles = StyleSheet.create({
+const howToUseModalStyles = StyleSheet.create({
   centeredView: {
     flex: 1,
     justifyContent: 'center',
@@ -27,10 +27,7 @@ const createModalStyles = StyleSheet.create({
     elevation: 5,
   },
   modalText: {
-    marginBottom: 15,
-    textAlign: 'center',
-    fontSize: 18,
-    fontWeight: 'bold',
+    width: '95%',
   },
   buttonView: {
     elevation: 2,
@@ -45,27 +42,13 @@ const createModalStyles = StyleSheet.create({
     marginTop: 10,
     width: '100%',
     alignItems: 'center',
-  },
-  buttonConform: {
-    backgroundColor: '#2196F3',
-  },
-  buttonClose: {
-    backgroundColor: '#E57373',
+    backgroundColor: 'grey',
   },
   textStyle: {
     color: 'white',
     fontWeight: 'bold',
     textAlign: 'center',
   },
-  inputContainer: {
-    marginTop: 10,
-    marginBottom: 10,
-    width: '100%',
-  },
-  inputTextArea: {
-    height: '200',
-  },
 });
 
-export default createModalStyles;
-
+export default howToUseModalStyles;

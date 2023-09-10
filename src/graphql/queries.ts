@@ -10,6 +10,7 @@ export const getMessage = /* GraphQL */ `
       name
       text
       imagePath
+      replyToId
       createdAt
       updatedAt
       __typename
@@ -29,6 +30,7 @@ export const listMessages = /* GraphQL */ `
         name
         text
         imagePath
+        replyToId
         createdAt
         updatedAt
         __typename

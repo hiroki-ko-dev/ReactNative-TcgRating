@@ -1,6 +1,7 @@
 import { PaginateType } from '../../components/Paginator/Paginator.type';
 
 export type PostType = {
+  no: number;
   id: number;
   name: string;
   userId: number;
@@ -23,6 +24,7 @@ export type IndexResponseType = {
 };
 
 export type PostCommentType = {
+  no: number;
   id: number;
   referralId: number;
   postId: number;

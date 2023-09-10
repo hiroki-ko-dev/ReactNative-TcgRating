@@ -10,8 +10,8 @@ export const getDateFormat = (dt: string) => {
 }
 
 export const utcConvertToJST = (date: Date) => {
-  const offset = -9 * 60;
-  const localOffset = date.getTimezoneOffset() * 60000;
-  const utc = date.getTime() + localOffset;
-  return new Date(utc + (3600000 * offset));
+  const offset = 9 * 60; // JST is UTC+9 hours
+  const utc = date.getTime();
+  const convertedDate = new Date(utc + (3600000 * offset));
+  return convertedDate;
 }

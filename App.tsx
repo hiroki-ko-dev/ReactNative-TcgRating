@@ -5,9 +5,9 @@ import Navigation from './assets/src/pages/Navigation/Navigation';
 import Login from './assets/src/pages/Login/Login';
 import { AuthContext } from './assets/src/contexts/auth/AuthContext';
 import { LoginUser } from './assets/src/contexts/auth/type';
+import { ImageProvider } from '@/contexts/image/ImageProvider';
 import { SnackProvider } from '@/contexts/snack/SnackProvider';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-
 
 Amplify.configure(awsconfig);
 
@@ -16,9 +16,11 @@ export default function App() {
   return (
     <SafeAreaProvider>
       <SnackProvider>
-        <AuthContext.Provider value={{ loginUser, setLoginUser }}>
-          {loginUser ? <Navigation /> : <Login />}
-        </AuthContext.Provider>
+        <ImageProvider>
+          <AuthContext.Provider value={{ loginUser, setLoginUser }}>
+            {loginUser ? <Navigation /> : <Login />}
+          </AuthContext.Provider>
+        </ImageProvider>
       </SnackProvider>
     </SafeAreaProvider>
   );

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext, useCallback } from 'react';
 import { Text, View, ScrollView, RefreshControl } from 'react-native';
 import { NavigationProp } from '@react-navigation/core';
-import { FAB, Provider, Snackbar } from 'react-native-paper';
+import { FAB, Provider } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { PostType, IndexResponseType } from '../type';
 import postStyles from './Index.style';
@@ -71,10 +71,9 @@ const Index = () => {
               <Text style={postStyles.cardContent}>現在スレッドがありません</Text>
             </View>
           }
-          {posts.map((post: PostType, i: number) => (
+          {posts.map((post: PostType) => (
             <Result
               post={post}
-              i={i}
               navigation={navigation}
               key={post.id}
             />
@@ -86,6 +85,8 @@ const Index = () => {
             paginate={paginate}
             onNext={() => setCurrentPage(prev => prev + 1)} 
             onPrevious={() => setCurrentPage(prev => prev - 1)}
+            onFirst={() => setCurrentPage(1)}
+            onLast={() => setCurrentPage(paginate.lastPage ?? 1)} 
           />
         </View>
       </ScrollView>

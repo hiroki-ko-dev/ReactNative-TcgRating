@@ -10,6 +10,7 @@ export const onCreateMessage = /* GraphQL */ `
       name
       text
       imagePath
+      replyToId
       createdAt
       updatedAt
       __typename
@@ -24,6 +25,7 @@ export const onUpdateMessage = /* GraphQL */ `
       name
       text
       imagePath
+      replyToId
       createdAt
       updatedAt
       __typename
@@ -38,6 +40,7 @@ export const onDeleteMessage = /* GraphQL */ `
       name
       text
       imagePath
+      replyToId
       createdAt
       updatedAt
       __typename

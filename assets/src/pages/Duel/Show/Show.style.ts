@@ -14,6 +14,7 @@ const showStyles = StyleSheet.create({
     marginLeft: 50,
     marginRight: 50,
     marginBottom: 10,
+    backgroundColor: 'black', 
   },
   buttonText: {
     fontSize: 16,

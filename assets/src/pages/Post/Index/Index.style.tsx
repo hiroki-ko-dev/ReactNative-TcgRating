@@ -26,11 +26,6 @@ const postStyles = StyleSheet.create({
     left: 0,
     right: 0,
   },
-  plusButton: {
-    position: 'absolute',
-    right: 20,
-    bottom: 20,
-  },
   inputContainer: {
     alignItems: 'center',
     justifyContent: 'center',
@@ -68,46 +63,36 @@ const postStyles = StyleSheet.create({
       alignItems: "center",
       margin: 5,
   },
-  modalView: {
-      width: 400,
-      margin: 5,
-      backgroundColor: "#ffffff",
-      borderRadius: 20,
-      padding: 35,
-      shadowColor: "#000",
-      shadowOffset: {
-          width: 0,
-          height: 2
-      },
-      shadowOpacity: 0.25,
-      shadowRadius: 4,
-      elevation: 5
+  plusButton: {
+    position: 'absolute',
+    right: 20,
+    bottom: 20,
   },
   button: {
-      borderRadius: 20,
-      padding: 10,
-      marginVertical: 10,
-      elevation: 2
+    borderRadius: 20,
+    padding: 10,
+    marginVertical: 10,
+    elevation: 2
   },
   buttonOpen: {
-      backgroundColor: "#F194FF",
+    backgroundColor: "#F194FF",
   },
   buttonClose: {
-      backgroundColor: "#7B7B7B",
+    backgroundColor: "#7B7B7B",
   },
   buttonConform: {
-      backgroundColor: "#007BFF",
+    backgroundColor: "#007BFF",
   },
   textStyle: {
-      color: "white",
-      fontWeight: "bold",
-      textAlign: "center",
-      fontSize: 16,
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center",
+    fontSize: 16,
   },
   modalText: {
-      marginBottom: 20,
-      fontSize: 18,
-      fontWeight: '600',
+    marginBottom: 20,
+    fontSize: 18,
+    fontWeight: '600',
   },
 });
 
