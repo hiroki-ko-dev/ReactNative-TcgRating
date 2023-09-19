@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { Amplify } from 'aws-amplify';
-import awsconfig from './src/aws-exports';
-import Navigation from './assets/src/pages/Navigation/Navigation';
-import Login from './assets/src/pages/Login/Login';
-import { AuthContext } from './assets/src/contexts/auth/AuthContext';
-import { LoginUser } from './assets/src/contexts/auth/type';
-import { ImageProvider } from '@/contexts/image/ImageProvider';
-import { SnackProvider } from '@/contexts/snack/SnackProvider';
+import awsconfig from '@/src/aws-exports';
+import Navigation from '@/app/pages/Navigation/Navigation';
+import Login from '@/app/pages/Login/Login';
+import { AuthContext } from '@/app/contexts/auth/AuthContext';
+import { LoginUser } from '@/app/contexts/auth/type';
+import { ImageProvider } from '@/app/contexts/image/ImageProvider';
+import { SnackProvider } from '@/app/contexts/snack/SnackProvider';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 Amplify.configure(awsconfig);
