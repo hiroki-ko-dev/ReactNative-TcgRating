@@ -13,8 +13,10 @@ import moment from 'moment';
 import 'moment/locale/ja';
 import { DISCORD_URL } from '@/app/config';
 import HowToUseModal from './HowToUseModal/HowToUseModal';
+import UserModal from './UserModal/UserModal';
 import { useIsFocused } from '@react-navigation/native';
 import { renderBubble } from './renderBubble/renderBubble';
+import { renderCustomAvatar } from './renderCustomAvatar/renderCustomAvatar';
 import { renderChatFooter } from './renderChatFooter/renderChatFooter';
 
 moment.locale('ja');
@@ -22,7 +24,8 @@ moment.locale('ja');
 const Chat: React.FC = () => {
   const loginUser = useLoginUser();
   const [messages, setMessages] = useState<ChatIMessage[]>([]);
-  const [howToUseModalVisible, setHowToUseModalVisible] = useState(false);
+  const [howToUseModalVisible, setHowToUseModalVisible] = useState<boolean>(false);
+  const [userIdForModal, setUserIdForModal] = useState<number|null>(null);
   const [lastReadMessageId, setLastReadMessageId] = useState(null);
   const isFocused = useIsFocused();
   const [replyingTo, setReplyingTo] = useState<ChatIMessage | null>(null);
@@ -35,7 +38,7 @@ const Chat: React.FC = () => {
         setMessages(previousMessages => GiftedChat.append(previousMessages, messageItems));
       })();
     }
-    
+  
     const subscriptionResult = API.graphql(graphqlOperation(onCreateMessage));
   
     if ('subscribe' in subscriptionResult) {
@@ -82,10 +85,17 @@ const Chat: React.FC = () => {
   return (
     <View style={{ flex: 1 }}>
       {howToUseModalVisible ?
-      <HowToUseModal
-        howToUseModalVisible={howToUseModalVisible}
-        setHowToUseModalVisible={setHowToUseModalVisible}
-      />
+        <HowToUseModal
+          howToUseModalVisible={howToUseModalVisible}
+          setHowToUseModalVisible={setHowToUseModalVisible}
+        />
+      : <></>}
+      {userIdForModal ?
+        <UserModal
+          messages={messages}
+          userIdForModal={userIdForModal}
+          setUserIdForModal={setUserIdForModal}
+        />
       : <></>}
       <TouchableOpacity 
         style={[chatStyles.button, chatStyles.howToUseButton]}
@@ -114,12 +124,13 @@ const Chat: React.FC = () => {
           style: { backgroundColor: '#333333' }
         }}
         placeholder="テキストを入力してください"
-        user={{ 
+        user={{
           _id: loginUser.user.id,
           name: loginUser.user.name,
         }}
         renderLoading={renderLoading}
         renderBubble={renderBubble(loginUser, setReplyingTo, messages)}
+        renderAvatar={renderCustomAvatar(setUserIdForModal)}
         renderChatFooter={() => renderChatFooter(replyingTo, setReplyingTo)}
         renderDay={renderDay}
         keyboardShouldPersistTaps='never'

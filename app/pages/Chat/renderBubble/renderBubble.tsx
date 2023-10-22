@@ -16,7 +16,7 @@ export const renderBubble  = (
   loginUser: LoginUser,
   setReplyingTo: any,
   messages: any
-  ) => (props: any) => {
+) => (props: any) => {
   const shouldDisplayUsername = props.previousMessage.user?._id !== props.currentMessage.user._id;
   const isLoginUserMessage = props.currentMessage.user._id === loginUser.user.id;
   const time = moment(props.currentMessage.createdAt).format('HH:mm');

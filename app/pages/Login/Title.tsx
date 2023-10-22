@@ -21,7 +21,7 @@ const Title: React.FC<TitleProps> = ({ setDiscordView, setAppleView }) => {
         >
           <Image
             style={{width:300, height:40}}
-            source={require('@/assets/images/apple/sign-in-button.png')}
+            source={require('@/assets/images/discord/login.png')}
           />
         </TouchableOpacity>
       </View>

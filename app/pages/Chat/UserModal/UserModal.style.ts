@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-const howToUseModalStyles = StyleSheet.create({
+const UserModalStyles = StyleSheet.create({
   centeredView: {
     flex: 1,
     justifyContent: 'center',
@@ -8,11 +8,11 @@ const howToUseModalStyles = StyleSheet.create({
     backgroundColor: 'rgba(0, 0, 0, 0.5)', 
   },
   modalView: {
-    marginTop: 22,
     width: '95%',
-    height: '80%',
+    height: '40%',
     margin: 10,
-    backgroundColor: 'white',
+    backgroundColor: 'black',
+    color: 'white',
     borderRadius: 20,
     padding: 20,
     alignItems: 'center',
@@ -27,7 +27,16 @@ const howToUseModalStyles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
   },
+  confirmView: {
+    marginTop: 10,
+  },
+  confirmButtonView: {
+    margin: 5,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
   modalText: {
+    color: 'white',
     width: '95%',
   },
   buttonView: {
@@ -37,6 +46,17 @@ const howToUseModalStyles = StyleSheet.create({
     alignItems: 'center',
   },
   button: {
+    borderRadius: 5,
+    padding: 10,
+    elevation: 2,
+    marginTop: 20,
+    width: 100,
+    alignItems: 'center',
+    borderColor: 'white',
+    borderWidth: 1,
+    // backgroundColor: 'grey',
+  },
+  closeButton: {
     borderRadius: 20,
     padding: 10,
     elevation: 2,
@@ -52,4 +72,4 @@ const howToUseModalStyles = StyleSheet.create({
   },
 });
 
-export default howToUseModalStyles;
+export default UserModalStyles;

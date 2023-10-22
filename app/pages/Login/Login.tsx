@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import { Platform, Text, View, Image, TouchableOpacity } from 'react-native';
-import { APP_URL, GAME_ID } from '../../config';
+import { APP_URL, GAME_ID } from '@/app/config';
 import styles from './Login.style';
 import { useAuth } from '../../contexts/auth/useAuth';
 import { useSnackbar } from '@/app/contexts/snack/useSnackbar';
@@ -23,8 +23,11 @@ const Login = () => {
     if (Platform.OS === 'web') {
       loginUserId = 14;
     } else {
-      loginUserId = 1;
-      // loginUserId = parseInt(e.data, 10);
+      // loginUserId = 1;
+      const parsedData = JSON.parse(e.nativeEvent.data);
+      console.log(parsedData.loginId);
+      loginUserId = parseInt(parsedData.loginId, 10);
+      console.log(loginUserId);
     }
     // ログインキャンセルした場合
     if (loginUserId === 0) {
@@ -57,20 +60,20 @@ const Login = () => {
       setSnackMessage('ログインエラーが発生しました')
     }
   };
-  // if (Platform.OS === 'web') {
+  if (Platform.OS === 'web') {
     login(14);
-  // }
-  // else {
-  //   if (discordView) {
-  //     return <DiscordView setDiscordView={setDiscordView} login={login} />;
-  //   } else if (appleView){
-  //     return <AppleView setAppleView={setAppleView} login={login} />;
-  //   } else if (!loginUser) {
-  //     return <Title setDiscordView={setDiscordView} setAppleView={setAppleView} />;
-  //   } else {
-  //     return (<></>);
-  //   }
-  // }
+  }
+  else {
+    if (discordView) {
+      return <DiscordView setDiscordView={setDiscordView} login={login} />;
+    } else if (appleView){
+      return <AppleView setAppleView={setAppleView} login={login} />;
+    } else if (!loginUser) {
+      return <Title setDiscordView={setDiscordView} setAppleView={setAppleView} />;
+    } else {
+      return (<></>);
+    }
+  }
 }
 
 export default Login;
